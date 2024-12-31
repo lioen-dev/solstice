@@ -296,12 +296,19 @@ def while_command(args):
                 break
 
             commands_to_run = ' '.join(args[start_idx + 1:end_idx])
+
             for cmd in commands_to_run.split(';'):
                 cmd = cmd.strip()
                 if cmd:
-                    result = handle_command(cmd.split(' '))
-                    if result == "exit":
-                        return "exit"
+                    command_parts = cmd.split(' ')
+                    command_name = command_parts[0]
+                    if command_name in commands:
+                        result = commands[command_name](command_parts)
+                        
+                        if result == "exit":
+                            return "exit"
+                    else:
+                        print(f"Unknown command: {command_name}")
 
     except Exception as e:
         print(f"Error in while statement: {e}")
