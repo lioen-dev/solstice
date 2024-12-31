@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="https://lioen.xyz/img/solstice.png">
+   <img src="https://lioen.xyz/img/solstice.jpeg">
    <h1>
       Solstice
    </h1>
