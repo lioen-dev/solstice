@@ -63,7 +63,11 @@ def parrot_command(args):
             return
         
         message = ' '.join(args[1:])
-        if '+' in message:
+
+        if args[1] == "math":
+            math_command(args[1:])
+
+        elif '+' in message:
             parts = message.split('+')
             result = ''
             for part in parts:
@@ -85,8 +89,6 @@ def parrot_command(args):
                 print(variables[args[1]])
             except:
                 print("Variable not found")
-        elif args[1] == "math":
-            math_command(args[1:])
     except Exception as e:
         print(f"Error: {e}")
         main()
@@ -135,12 +137,6 @@ def set_variable_command(args):
                 max_val = int(args[5])
                 value = random.randint(min_val, max_val)
                 variables[varname] = value
-            
-            elif args[3] == "im":
-                uwu = " ".join(args[3:])
-                if uwu == "im addicted to crack cocaine uwu":
-                    while True:
-                        print("uwu")
 
             else:
                 value = " ".join(args[3:])
