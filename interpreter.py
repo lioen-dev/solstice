@@ -360,75 +360,6 @@ def for_command(args):
 
     end_command()
 
-def make_dict_command(args):
-    try:
-        if len(args) < 2:
-            print("Invalid syntax. Use: makedict dict_name")
-            return
-        variables[args[1]] = {}
-    except Exception as e:
-        print(f"Error: {e}")
-    end_command()
-
-def dict_command(args):
-    try:
-        if len(args) < 3:
-            print("Invalid syntax. Use: dict dict_name action [key] [value]")
-            return
-
-        dict_name = args[1]
-        action = args[2]
-
-        if dict_name not in variables or not isinstance(variables[dict_name], dict):
-            print(f"{dict_name} is not a dictionary")
-            return
-
-        if action == "get":
-            if len(args) < 4:
-                print("Invalid syntax. Use: dict dict_name get key")
-                return
-            key = args[3]
-            return variables[dict_name].get(key, f"Key '{key}' not found")
-        
-        elif action == "set":
-            if len(args) < 5:
-                print("Invalid syntax. Use: dict dict_name set key value")
-                return
-            key = args[3]
-            value = " ".join(args[4:])
-            if value.isdigit():
-                value = int(value)
-            elif value.replace('.', '', 1).isdigit():
-                value = float(value)
-            elif value in variables:
-                value = variables[value]
-            variables[dict_name][key] = value
-        
-        elif action == "del":
-            if len(args) < 4:
-                print("Invalid syntax. Use: dict dict_name del key")
-                return
-            key = args[3]
-            if key in variables[dict_name]:
-                del variables[dict_name][key]
-            else:
-                print(f"Key '{key}' not found")
-        
-        elif action == "keys":
-            return list(variables[dict_name].keys())
-        
-        elif action == "values":
-            return list(variables[dict_name].values())
-        
-        elif action == "items":
-            return list(variables[dict_name].items())
-        
-        else:
-            print(f"Unknown dictionary action: {action}")
-    except Exception as e:
-        print(f"Error: {e}")
-    end_command()
-
 def execute_command(command, args):
     if command in commands:
         return commands[command](args)
@@ -512,8 +443,6 @@ commands = {
     "while": while_command,
     "for": for_command,
     "exit": exit_command,
-    "makedict": make_dict_command,
-    "dict": dict_command,
     "run": execute_command,
     "random": random_number,
 }
